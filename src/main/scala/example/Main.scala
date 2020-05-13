@@ -8,6 +8,9 @@ import jsonserializer.JsonSerializer.Person
 import printablelibrary.Printable
 import printablelibrary.PrintableInstances._
 import printablelibrary.PrintableSyntax._
+import cats.syntax.show._
+import catsshow.CatShowInstances._
+
 
 object Main extends App {
 
@@ -31,6 +34,11 @@ object Main extends App {
   Printable.print(cat)
 
   cat.print
+
+  val cat2 = Cat("Billu", 4, "white")
+  println(cat2.show)
+
+
 
 
 

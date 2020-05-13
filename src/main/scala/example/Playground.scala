@@ -1,10 +1,13 @@
 package example
 
+import java.util.Date
+
 import cats.Show
 import cats.instances.int._
 import cats.instances.string._
-
-import cats.syntax.show._ // show interface syntax
+import cats.syntax.show._
+import catsshow.CatShowInstances._
+import datatype.Cat
 
 object Playground extends App {
 
@@ -22,5 +25,8 @@ object Playground extends App {
   val showString2 = "abc".show
   println(showInt2)
   println(showString2)
+
+  println(new Date().show)
+  println(Cat("abc", 2,"abc").show)
 
 }
