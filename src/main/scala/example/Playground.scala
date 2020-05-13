@@ -6,7 +6,11 @@ import cats.Show
 import cats.instances.int._
 import cats.instances.string._
 import cats.syntax.show._
-import catsshow.CatShowInstances._
+import cats.instances.option._
+import cats.syntax.eq._
+import cats.syntax.option._
+import catscustominstances.CatShowInstances._
+import catscustominstances.CatsEqInstances._
 import datatype.Cat
 
 object Playground extends App {
@@ -28,5 +32,14 @@ object Playground extends App {
 
   println(new Date().show)
   println(Cat("abc", 2,"abc").show)
+
+  val cat1 = Cat("Garfield", 38, "orange and black")
+  val cat2 = Cat("Heathcliff", 33, "orange and black")
+
+  println(cat1 === cat2)
+  println(Option(cat1) === Option(cat1))
+  println(cat1.some === cat2.some)
+
+
 
 }

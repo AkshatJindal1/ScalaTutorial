@@ -1,4 +1,4 @@
-package catsshow
+package catscustominstances
 
 import java.util.Date
 
