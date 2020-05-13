@@ -15,6 +15,10 @@ import catscustominstances.CatsEqInstances._
 import cats.syntax.show._
 import cats.syntax.eq._
 import cats.instances.option._
+import cats.syntax.monoid._
+
+import monoidsandsemigroups.MonoidInstances._
+import monoidsandsemigroups.MonoidSyntax._
 
 
 object Main extends App {
@@ -55,6 +59,12 @@ object Main extends App {
 
   println(Option(cat1) === Option.empty[Cat])
   println(Option(cat2) =!= Option.empty[Cat])
+
+  //Monoids
+//  combine(true, false)
+//  true combine false  -> wont work as we have two implementation of monoids of booleanAn
+  println(Set(1,2,3) combine Set(2,3,4))
+
 
 
 
