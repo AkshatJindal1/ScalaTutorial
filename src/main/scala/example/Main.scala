@@ -1,11 +1,13 @@
 package example
 
+import datatype.Cat
 import jsonserializer.JsonSyntax._
 import jsonserializer.JsonWriterInstances._
 import jsonserializer.Json
 import jsonserializer.JsonSerializer.Person
 import printablelibrary.Printable
 import printablelibrary.PrintableInstances._
+import printablelibrary.PrintableSyntax._
 
 object Main extends App {
 
@@ -24,5 +26,14 @@ object Main extends App {
   //  Printable class type
   Printable.print("Akshat")
   Printable.print(1)
+
+  val cat = Cat("Kitty", 2, "brown")
+  Printable.print(cat)
+
+  cat.print
+
+
+
+
 
 }
