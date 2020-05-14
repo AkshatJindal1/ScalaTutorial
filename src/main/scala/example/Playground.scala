@@ -9,9 +9,15 @@ import cats.syntax.show._
 import cats.instances.option._
 import cats.syntax.eq._
 import cats.syntax.option._
-import catscustominstances.CatShowInstances._
-import catscustominstances.CatsEqInstances._
-import datatype.Cat
+import custominstances.CatShowInstances._
+import custominstances.CatsEqInstances._
+import datatype.{Box, Cat, Order}
+import cats.Monoid
+import cats.Semigroup
+import cats.syntax.semigroup._
+import custominstances.OrderMonoidInstances._
+import codec.CodecInstances._
+import codec.Codec
 
 object Playground extends App {
 
@@ -39,6 +45,28 @@ object Playground extends App {
   println(cat1 === cat2)
   println(Option(cat1) === Option(cat1))
   println(cat1.some === cat2.some)
+
+  //  Monoid
+  println(Monoid[String].combine("Hi ","there"))
+  println(Monoid[String].empty)
+  println(Semigroup[String].combine("Hi ","Akshat"))
+  println(Monoid[Int].combine(12,24))
+  println(Monoid[Option[Int]].combine(Option(12), Option(24)))
+
+  //  Monoid Syntax
+  println("Hi " |+| "there")
+
+  val orderList = List(Order(12, 6), Order(14,10), Order(124, 32))
+  println(s"Total order and sum is ${SuperAdder.superAdderMonoid(orderList)}")
+
+  //  Codec
+  println(Codec.encode(12))
+  println(Codec.decode[Double]("12"))
+  println(Codec.encode(Box(12)))
+  println(Codec.decode[Box[Boolean]]("true"))
+
+
+
 
 
 

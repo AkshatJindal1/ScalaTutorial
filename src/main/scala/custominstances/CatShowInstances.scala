@@ -1,4 +1,4 @@
-package catscustominstances
+package custominstances
 
 import java.util.Date
 
