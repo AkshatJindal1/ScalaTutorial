@@ -7,6 +7,7 @@ import cats.instances.int._
 import cats.instances.string._
 import cats.syntax.show._
 import cats.instances.option._
+import cats.instances.list._
 import cats.syntax.eq._
 import cats.syntax.option._
 import custominstances.CatShowInstances._
@@ -64,6 +65,46 @@ object Playground extends App {
   println(Codec.decode[Double]("12"))
   println(Codec.encode(Box(12)))
   println(Codec.decode[Box[Boolean]]("true"))
+
+  //  flatmap
+  def parseInt(str: String): Option[Int] =
+    scala.util.Try(str.toInt).toOption
+  def divide(a: Int, b: Int): Option[Int] =
+    if(b==0) None else Some(a / b)
+  def stringDivideBy(aStr: String, bStr: String): Option[Int] =
+    parseInt(aStr).flatMap { aNum =>
+      parseInt(bStr).flatMap { bNum =>
+        divide(aNum, bNum)
+      }
+    }
+
+  println(stringDivideBy("6","2"))
+  println(stringDivideBy("6","0"))
+
+  import cats.Monad
+  import cats.syntax.functor._ // for map
+  import cats.syntax.flatMap._ // for flatmap
+  import cats.syntax.applicative._ // for pure
+
+  println(10.pure[Option])
+  println(10.pure[List])
+
+  def sumSquare[F[_]: Monad](a: F[Int], b: F[Int]): F[Int] =
+    a.flatMap(x => b.map(y => x*x + y*y))
+
+  //  Can be written using for comprehension
+  def sumSquared[F[_]: Monad](a: F[Int], b: F[Int]): F[Int] =
+    for {
+      x <- a
+      y <- b
+    } yield x*x + y*y
+
+  println(sumSquare(Option(3), Option(4)))
+  println(sumSquare(List(1,2,3), List(4,5)))
+
+  println(sumSquared(Option(3), Option(4)))
+  println(sumSquared(List(1,2,3), List(4,5)))
+
 
 
 
